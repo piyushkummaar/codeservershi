@@ -49,3 +49,14 @@ module.exports.userProfile = (req, res, next) =>
     );
 }
 
+module.exports.upsertUserProfile= (req, res, next) =>
+{
+    console.log(req.file);
+    if(!req.file) {
+      res.status(500);
+      return next(err);
+    }
+    res.json({ fileUrl: 'http://localhost:3000/images/' + req.file.filename });
+}
+
+    
