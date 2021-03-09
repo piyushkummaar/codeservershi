@@ -10,10 +10,13 @@ const rtsIndex = require('./routes/index.router');
 
 var app = express();
 
+
 // middleware
+app.use(bodyParser.json());
 app.use(cors());
 app.use(passport.initialize());
 app.use('/api', rtsIndex);
+
 
 // error handler
 app.use((err, req, res, next) => {
