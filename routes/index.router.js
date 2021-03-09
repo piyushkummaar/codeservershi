@@ -40,7 +40,7 @@ router.post('/employeepost', ctrlEmployee.employeepost);
 router.post('/register', ctrlUser.register);
 router.post('/authenticate', ctrlUser.authenticate);
 router.get('/userProfile',jwtHelper.verifyJwtToken, ctrlUser.userProfile);
-router.post('/updateUserProfile',upload.single('file'), ctrlUser.upsertUserProfile);
+router.post('/updateUserProfile',upload.single('profileImage'), ctrlUser.upsertUserProfile);
 
 // Admin
 router.get('/home', ctrlAdmin.adminHome);
