@@ -6,3 +6,5 @@ mongoose.connect(process.env.MONGODB_URI,{useNewUrlParser: true, useUnifiedTopol
 });
 
 require('./user.model');
+require('./employee');
+require('./userprofile.model');

@@ -3,6 +3,7 @@ const passport = require('passport');
 const _ = require('lodash');
 
 const User = mongoose.model('User');
+const UserProfile = mongoose.model('upsertUserProfile');
 
 module.exports.register = (req, res, next) => {
     var user = new User();
@@ -50,13 +51,23 @@ module.exports.userProfile = (req, res, next) =>
 }
 
 module.exports.upsertUserProfile= (req, res, next) =>
-{
-    console.log(req.file);
+{   
+    var userPro = new UserProfile();
+    userPro.userid = req.body.userID
+    userPro.address = req.body.address;
+    userPro.mobile = req.body.mobile;
+    userPro.alternativeNo = req.body.alternativeNo;
+    userPro.profileImage = 'http://localhost:3000/images/' + req.file.filename
     if(!req.file) {
-      res.status(500);
-      return next(err);
-    }
-    res.json({ fileUrl: 'http://localhost:3000/images/' + req.file.filename });
-}
-
+        res.status(500);
+        return next(err);
+      }
+    userPro.save((err, doc) => {
+        if (!err)
+            res.send(doc);
+        else 
+            return next(err);
+    });  
     
+    // res.json({ fileUrl: 'http://localhost:3000/images/' + req.file.filename });
+}
