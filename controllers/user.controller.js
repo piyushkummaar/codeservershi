@@ -3,7 +3,7 @@ const passport = require('passport');
 const _ = require('lodash');
 
 const User = mongoose.model('User');
-// const UserProfile = mongoose.model('upsertUserProfile');
+const UserProfile = mongoose.model('upsertUserProfile');
 
 module.exports.register = (req, res, next) => {
     var user = new User();
