@@ -41,6 +41,7 @@ router.post('/register', ctrlUser.register);
 router.post('/authenticate', ctrlUser.authenticate);
 router.get('/userProfile',jwtHelper.verifyJwtToken, ctrlUser.userProfile);
 router.post('/updateUserProfile',upload.single('profileImage'), ctrlUser.upsertUserProfile);
+router.post('/forgotpassword',ctrlUser.forgotpassword)
 
 // Admin
 router.get('/home', ctrlAdmin.adminHome);

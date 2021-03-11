@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const passport = require('passport');
+const nodemailer = require('nodemailer'); 
+// const {v4 : uuidv4} = require('uuid') ;
 const _ = require('lodash');
 
 const User = mongoose.model('User');
@@ -68,6 +70,31 @@ module.exports.upsertUserProfile= (req, res, next) =>
         else 
             return next(err);
     });  
-    
     // res.json({ fileUrl: 'http://localhost:3000/images/' + req.file.filename });
+}
+
+module.exports.forgotpassword= (req, res, next) =>
+{   
+    let mailTransporter = nodemailer.createTransport({ 
+        service: 'gmail', 
+        auth: { 
+            user: 'testusr5055@gmail.com', 
+            pass: 'james_bon007'
+        } 
+    }); 
+
+    let mailDetails = { 
+        from: 'testusr5055@gmail.com', 
+        to: req.body.email, 
+        subject: 'Verification email from Project Management System.', 
+        html: '<h1>Verification Email</h1><br><a>http://localhost:4200/uid</a><p>Get your <b>Account</b> Back!</p>'
+    }; 
+
+    mailTransporter.sendMail(mailDetails, function(err, data) { 
+        if(err) { 
+            res.send('Error Occurs') 
+        } else { 
+            res.send('Email sent successfully');
+        } 
+    }); 
 }
